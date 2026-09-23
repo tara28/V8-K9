@@ -178,16 +178,7 @@ async function trackVisit(path){
     }catch(e){
       console.warn('V8.K9 visite non enregistrée (essai '+(attempt+1)+')',e);
       if(attempt===0)await new Promise(ok=>setTimeout(ok,1200));
-      else{
-        const msg=String(e&&e.message?e.message:e||'Erreur inconnue');
-        let box=document.getElementById('v8VisitDiagnostic');
-        if(!box){
-          box=document.createElement('div'); box.id='v8VisitDiagnostic';
-          box.style.cssText='position:fixed;left:12px;right:12px;bottom:90px;z-index:999999;background:#111;border:2px solid #d4af37;color:#fff;padding:14px;font:14px/1.4 system-ui;word-break:break-word;max-height:42vh;overflow:auto';
-          document.body.appendChild(box);
-        }
-        box.innerHTML='<b style=\"color:#d4af37\">DIAGNOSTIC VISITE V8.K9</b><br><br>'+esc(msg)+'<br><br><small>Chemin : '+esc(p)+'</small>';
-      }
+      else{ console.warn('V8.K9 : suivi des visites indisponible',e); }
     }
   }
   return false;
